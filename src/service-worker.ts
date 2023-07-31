@@ -22,7 +22,6 @@ chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
 });
 
 chrome.runtime.onMessage.addListener(async (message, sender) => {
-      console.log(message);
   switch (message.action) {
     case "css":
       if (
