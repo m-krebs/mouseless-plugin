@@ -1,1 +1,10 @@
+/node_modules
+/web-ext-artifacts
+/dist
+*.js
+*.css
+*.css.map
+*.tar.gz
 *.zip
+yarn-debug.log*
+yarn-error.log*
