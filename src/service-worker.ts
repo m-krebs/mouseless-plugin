@@ -20,7 +20,9 @@ chrome.tabs.query({}).then((tabs) => {
 
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
   if (tab.url?.startsWith("chrome") || tab.url === undefined) return;
-  chrome.scripting.insertCSS({ files: [file], target: { tabId: tabId } });
+  chrome.scripting
+    .insertCSS({ files: [file], target: { tabId: tabId } })
+    .catch((err) => console.log("error: " + err + " in " + tab.url));
 });
 
 chrome.runtime.onMessage.addListener(async (message, sender) => {
@@ -31,10 +33,12 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
         sender.tab!.url === undefined
       )
         break;
-      chrome.scripting.insertCSS({
-        files: [file],
-        target: { tabId: sender.tab!.id! },
-      });
+      chrome.scripting
+        .insertCSS({
+          files: [file],
+          target: { tabId: sender.tab!.id! },
+        })
+        .catch((err) => console.log("error: " + err));
       break;
     case "changeTabLeft": {
       const query = { currentWindow: true, index: await getIndex(sender, -1) };
