@@ -2,22 +2,24 @@
   "manifest_version": 3,
   "name": "Mouseless",
   "version": "1.0.0",
-  "description": "For a mouseless future, on chrome",
+  "description": "For a mouseless future, but on chrome",
   "icons": {
     "32": "icons/icon-32.png",
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "service-worker.js"
   },
   "content_scripts": [
     {
-      "js": ["scripts/content.js"],
+      "js": ["scripts/content-script.js"],
       "matches": ["*://*/*"]
     }
   ],
-  "options_page": "options/options.html",
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
   "permissions": ["storage", "scripting", "tabs"],
   "host_permissions": ["*://*/*"]
 }
