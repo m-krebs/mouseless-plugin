@@ -12,7 +12,9 @@ const file = "styles.css";
 chrome.tabs.query({}).then((tabs) => {
   for (const tab of tabs) {
     if (tab.url?.startsWith("chrome") || tab.url === undefined) continue;
-    chrome.scripting.insertCSS({ files: [file], target: { tabId: tab.id! } });
+    chrome.scripting
+      .insertCSS({ files: [file], target: { tabId: tab.id! } })
+      .catch((err) => console.log("error: " + err + " in " + tab.url));
   }
 });
 
