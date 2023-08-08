@@ -20,6 +20,7 @@
   "action": {
     "default_popup": "popup/popup.html"
   },
+  "options_page": "options/options.html",
   "permissions": ["storage", "scripting", "tabs"],
   "host_permissions": ["*://*/*"]
 }

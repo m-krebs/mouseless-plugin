@@ -9,126 +9,151 @@
         color: #fff;
       }
     </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <label for="presets" class="text-3xl presets">Presets</label>
-
     <form>
-      <button type="submit">Save</button>
-
-      <label class="option" name="conf.chars">
-        Blob Characters
-        <input class="current" />
-      </label>
-
-      <label class="option" name="conf.timer">
-        Auto-submit timer (in ms; 0 for no timer)
-        <input class="current" />
-      </label>
-
-      <label class="option big" name="conf.blacklist">
-        Blacklisted URLs
+      <div>
+        <label>Search Engine</label>
+        <select data-value="conf.search_engine">
+          <option value="google">Google</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="bing">Bing</option>
+          <option value="yahoo">Yahoo</option>
+          <option value="yandex">Yandex</option>
+          <option value="ecosia">Ecosia</option>
+          <option value="custom">Custom</option>
+        </select>
+        <input
+          id="custom_search"
+          data-value="conf.custom_search_engine"
+          placeholder="https://example.com/search?q={{{s}}}"
+          title="Paste your custom Search-Url and use {{{s}}} as placeholder for the search term."
+          required
+          style="display: none"
+        />
+      </div>
+      <div>
+        <label> Blacklisted URLs </label>
         <textarea
-          class="current"
+          data-value="conf.blacklist"
           placeholder="http://example.com/.*/example"
         ></textarea>
+      </div>
+      <label>
+        Blob Characters
+        <input data-value="conf.chars" />
       </label>
-
-      <hr />
-
-      <label class="option" name="keys.scroll_up">
-        Scroll Up
-        <input class="current" />
-      </label>
-
-      <label class="option" name="keys.scroll_down">
-        Scroll Down
-        <input class="current" />
-      </label>
-
-      <label class="option" name="keys.scroll_up_fast">
-        Scroll Up Fast
-        <input class="current" />
-      </label>
-
-      <label class="option" name="keys.scroll_down_fast">
-        Scroll Down Fast
-        <input class="current" />
-      </label>
-
-      <label class="option" name="keys.blobs_show">
+      <label>
         Show Blobs
-        <input class="current" />
+        <input data-value="keys.blobs_show" />
       </label>
-
-      <label class="option" name="keys.blobs_hide">
-        Hide Blobs
-        <input class="current" />
+      <label>
+        Click Blob
+        <input data-value="keys.blobs_click" />
       </label>
-
-      <label class="option" name="keys.blobs_click">
-        Click
-        <input class="current" />
+      <label>
+        Reload Blobs
+        <input data-value="keys.reload" />
       </label>
-
-      <label class="option" name="keys.blobs_click_new_tab">
+      <label>
         Open in New Tab
-        <input class="current" />
+        <input data-value="keys.new_tab" />
       </label>
-
-      <label class="option" name="keys.blobs_click_clipboard">
+      <label>
+        Middle Mouse Click
+        <input data-value="keys.middle_click" />
+      </label>
+      <label>
         Save URL to Clipboard
-        <input class="current" />
+        <input data-value="keys.clipboard_copy" />
       </label>
-
-      <label class="option" name="keys.blobs_focus">
-        Focus
-        <input class="current" />
+      <label>
+        Paste from Clipboard to Blob
+        <input data-value="keys.clipboard_paste" />
       </label>
-
-      <label class="option" name="keys.blobs_backspace">
-        Blobs Backspace
-        <input class="current" />
+      <label>
+        Focus on Blob
+        <input data-value="keys.blobs_focus" />
       </label>
-
-      <label class="option" name="keys.elem_deselect">
+      <label>
         Deselect Current Element
-        <input class="current" />
+        <input data-value="keys.elem_deselect" />
       </label>
-
-      <label class="option" name="keys.change_tab_left">
+      <label>
+        New Window using Link
+        <input data-value="keys.new_window" />
+      </label>
+      <label>
+        Private Window using Link
+        <input data-value="keys.private_window" />
+      </label>
+      <label>
+        Search highlighted text
+        <input data-value="keys.search" />
+      </label>
+      <label>
+        Duplicate Tab
+        <input data-value="keys.duplicate_tab" />
+      </label>
+      <label>
+        Back One Page in History
+        <input data-value="keys.history_back" />
+      </label>
+      <label>
+        Forward One Page in History
+        <input data-value="keys.history_forward" />
+      </label>
+      <label>
+        Scroll Down
+        <input data-value="keys.scroll_down" />
+      </label>
+      <label>
+        Scroll Up
+        <input data-value="keys.scroll_up" />
+      </label>
+      <label>
+        Scroll Down Fast
+        <input data-value="keys.scroll_down_fast" />
+      </label>
+      <label>
+        Scroll Up Fast
+        <input data-value="keys.scroll_up_fast" />
+      </label>
+      <label>
+        Scroll Left
+        <input data-value="keys.scroll_left" />
+      </label>
+      <label>
+        Scroll Right
+        <input data-value="keys.scroll_right" />
+      </label>
+      <label>
+        Go to the Top of the Page
+        <input data-value="keys.scroll_top" />
+      </label>
+      <label>
+        Go to the Bottom of the Page
+        <input data-value="keys.scroll_bottom" />
+      </label>
+      <label>
         Switch to Left Tab
-        <input class="current" />
+        <input data-value="keys.change_tab_left" />
       </label>
-
-      <label class="option" name="keys.change_tab_right">
+      <label>
         Switch to Right Tab
-        <input class="current" />
+        <input data-value="keys.change_tab_right" />
       </label>
-
-      <label class="option" name="keys.move_tab_left">
+      <label>
         Move Tab to the Left
-        <input class="current" />
+        <input data-value="keys.move_tab_left" />
       </label>
-
-      <label class="option" name="keys.move_tab_right">
+      <label>
         Move Tab to the Right
-        <input class="current" />
+        <input data-value="keys.move_tab_right" />
       </label>
-
-      <label class="option" name="keys.history_back">
-        Go Back
-        <input class="current" />
-      </label>
-
-      <label class="option" name="keys.history_forward">
-        Go Forward
-        <input class="current" />
-      </label>
-
       <button type="submit">Save</button>
     </form>
-
     <script src="options.js"></script>
   </body>
 </html>

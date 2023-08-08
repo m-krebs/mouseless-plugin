@@ -8,6 +8,8 @@ let blacklisted = false;
 const config = {
   blacklist: "",
   characters: ";alskdjfiwoe",
+  search_engine: "google",
+  custom_search_engine: "",
 };
 
 const keys = {
@@ -43,7 +45,7 @@ const keys = {
 const bindKeys = async () => {
   const sync = await chrome.storage.sync.get();
   for (const name of Object.keys(keys)) {
-    const hotkey = sync[name] ?? keys[name as keyof typeof keys];
+    const hotkey = sync.keys[name] ?? keys[name as keyof typeof keys];
     let sum = 0;
     for (const mod of hotkey.match(/<[a-zA-Z]+>/g) ?? []) {
       switch (mod.substring(1, mod.length - 1).toLowerCase()) {
@@ -238,9 +240,22 @@ const blobList = {
     blob.focus();
     blobList.hideBlobs();
   },
-  search: () => {
+  search: async () => {
     const text = document.getSelection()!.toString();
-    if (text) window.open(`http://google.com/search?q=${text}`);
+    if (text) {
+      const storage = await chrome.storage.sync.get();
+      const searchEngineString = storage.conf["search_engine"] || "google";
+      let searchString;
+      if (searchEngineString === "custom") {
+        searchString = storage.conf["custom_search_engine"].replace(
+          "{{{s}}}",
+          encodeURIComponent(text)
+        );
+      } else {
+        searchString = searchEngine[searchEngineString].search(text);
+      }
+      window.open(searchString);
+    }
   },
   newWindow: (windowType?: string) => {
     const blob = blobList.blobs.get(blobList.keyInput.value);
@@ -279,6 +294,25 @@ const isValidElem = (elem: HTMLElement) => {
   }
   return elem.contentEditable.toLocaleLowerCase() === "true";
 };
+
+const searchEngine: { [key: string]: any } = {
+  google: createSearchString("https://google.com/search?q={{{s}}}"),
+  duckduckgo: createSearchString("https://duckduckgo.com?q={{{s}}}"),
+  bing: createSearchString("https://bing.com/search?q={{{s}}}"),
+  yahoo: createSearchString("https://search.yahoo.com/search?p={{{s}}}"),
+  yandex: createSearchString("https://yandex.com/search?text={{{s}}}"),
+  ecosia: createSearchString("https://ecosia.org/search?q={{{s}}}"),
+};
+
+function createSearchString(baseUrl: string): {
+  search: (query: string) => string;
+} {
+  return {
+    search: (query: string) => {
+      return baseUrl.replace("{{{s}}}", encodeURIComponent(query));
+    },
+  };
+}
 
 window.onkeydown = (event) => {
   if (blacklisted) return;
