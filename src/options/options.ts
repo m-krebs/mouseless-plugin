@@ -38,32 +38,28 @@ const presets = {
 
 chrome.storage.sync.get().then((sync) => {
   for (const elem of document.querySelectorAll("input, textarea, select")) {
-    const [section, name] = elem.getAttribute("data-value")?.split(".");
-    (elem as HTMLInputElement).value = sync[section]?.[name] || presets[section][name];
-    if (name === "search_engine") {
-  document.getElementById("custom_search")!.style.display = "block";
+    const [section, name] = elem.getAttribute("data-value")!.split(".");
+    (elem as HTMLInputElement).value =
+      sync[section]?.[name] || (presets as any)[section][name];
+    if (name === "search_engine" && sync[section]?.[name] === "custom") {
+      document.getElementById("custom_search")!.style.display = "block";
     }
   }
 });
 
-const search = document.querySelector("select");
-console.log(search.value);
-if (search.value === "custom") {
-}
-
-document.querySelector("select").onchange = (event) => {
-  if (event.target.value === "custom") {
-    document.getElementById("custom_search").style.display = "block";
+document.querySelector("select")!.onchange = (event) => {
+  if ((event.target as HTMLInputElement)!.value === "custom") {
+    document.getElementById("custom_search")!.style.display = "block";
   } else {
-    document.getElementById("custom_search").style.display = "none";
+    document.getElementById("custom_search")!.style.display = "none";
   }
 };
 
-document.querySelector("form").onsubmit = (event) => {
+document.querySelector("form")!.onsubmit = (event) => {
   event.preventDefault();
   for (const elem of document.querySelectorAll("input, textarea, select")) {
-    const [section, name] = elem.getAttribute("data-value")?.split(".");
-    presets[section][name] = elem.value;
+    const [section, name] = elem.getAttribute("data-value")!.split(".");
+    (presets as any)[section][name] = (elem as HTMLInputElement).value;
   }
   chrome.storage.sync.set(presets);
 };
