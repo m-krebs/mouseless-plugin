@@ -26,4 +26,4 @@ For a mouseless future, but on chrome
 | Alt+Shift+P / Alt+Shift+N | Move current tab to the left/right    |
 
 ## Credits
-This project is a chrome-wrap of the improved [MouselessV2](https://github.com/Dosx001/mouselessV2) version, based on the [original Mouseless](https://github.com/mortie/mouseless-plugin) extension of [Mortie](https://github.com/mortie). 
+This project is a chrome-wrap of the improved [Dosx001/mouselessV2](https://github.com/Dosx001/mouselessV2) version, based on the original [mortie/mouseless-plugin](https://github.com/mortie/mouseless-plugin).
