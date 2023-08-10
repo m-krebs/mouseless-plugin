@@ -42,16 +42,22 @@ chrome.storage.sync.get().then((sync) => {
     (elem as HTMLInputElement).value =
       sync[section]?.[name] || (presets as any)[section][name];
     if (name === "search_engine" && sync[section]?.[name] === "custom") {
-      document.getElementById("custom_search")!.style.display = "block";
+      const inputField = document.getElementById("custom_search");
+      inputField!.style.display = "block";
+      (inputField as HTMLInputElement)!.required = true;
     }
   }
 });
 
 document.querySelector("select")!.onchange = (event) => {
   if ((event.target as HTMLInputElement)!.value === "custom") {
-    document.getElementById("custom_search")!.style.display = "block";
+    let inputField = document.getElementById("custom_search");
+    inputField!.style.display = "block";
+    (inputField as HTMLInputElement)!.required = true;
   } else {
-    document.getElementById("custom_search")!.style.display = "none";
+    let inputField = document.getElementById("custom_search");
+    inputField!.style.display = "none";
+    (inputField as HTMLInputElement)!.required = false;
   }
 };
 
