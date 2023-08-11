@@ -11,28 +11,24 @@ const file = "styles.css";
 
 chrome.tabs.query({}).then((tabs) => {
   for (const tab of tabs) {
-    if (tab.url?.startsWith("chrome") || tab.url === undefined) continue;
+    if (tab.url === undefined) continue;
     chrome.scripting
       .insertCSS({ files: [file], target: { tabId: tab.id! } })
-      .catch((err) => console.log("error: " + err + " In " + tab.url + " (I think you can ignore this :))"));
+      .catch((err) => console.log("error: " + err + " In " + new URL(tab.url!).hostname));
   }
 });
 
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (tab.url?.startsWith("chrome") || tab.url === undefined) return;
+  if (tab.url === undefined) return;
   chrome.scripting
     .insertCSS({ files: [file], target: { tabId: tabId } })
-    .catch((err) => console.log("error: " + err + " In " + tab.url+ " (I think you can ignore this :))"));
+    .catch((err) => console.log("error: " + err + " In " + new URL(tab.url!).hostname));
 });
 
 chrome.runtime.onMessage.addListener(async (message, sender) => {
   switch (message.action) {
     case "css":
-      if (
-        sender.tab!.url?.startsWith("chrome") ||
-        sender.tab!.url === undefined
-      )
-        break;
+      if (sender.tab!.url === undefined) break;
       chrome.scripting
         .insertCSS({
           files: [file],
