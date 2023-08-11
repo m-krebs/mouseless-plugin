@@ -45,7 +45,7 @@ const keys = {
 const bindKeys = async () => {
   const sync = await chrome.storage.sync.get();
   for (const name of Object.keys(keys)) {
-    const hotkey = sync.keys[name] ?? keys[name as keyof typeof keys];
+    const hotkey = sync.keys?.name || keys[name as keyof typeof keys];
     let sum = 0;
     for (const mod of hotkey.match(/<[a-zA-Z]+>/g) ?? []) {
       switch (mod.substring(1, mod.length - 1).toLowerCase()) {
@@ -243,11 +243,11 @@ const blobList = {
   search: async () => {
     const text = document.getSelection()!.toString();
     if (text) {
-      const storage = await chrome.storage.sync.get();
-      const searchEngineString = storage.conf["search_engine"] || "google";
+      const sync = await chrome.storage.sync.get();
+      const searchEngineString = sync.conf?.["search_engine"] || "google";
       let searchString;
       if (searchEngineString === "custom") {
-        searchString = storage.conf["custom_search_engine"].replace(
+        searchString = sync.conf["custom_search_engine"].replace(
           "{{{s}}}",
           encodeURIComponent(text)
         );
