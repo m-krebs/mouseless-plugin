@@ -8,3 +8,4 @@
 *.zip
 yarn-debug.log*
 yarn-error.log*
+!webpack/webpack.config.js
