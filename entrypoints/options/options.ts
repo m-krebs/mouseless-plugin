@@ -36,7 +36,7 @@ const presets = {
   },
 };
 
-chrome.storage.sync.get().then((sync) => {
+browser.storage.sync.get().then((sync) => {
   for (const elem of document.querySelectorAll("input, textarea, select")) {
     const [section, name] = elem.getAttribute("data-value")!.split(".");
     (elem as HTMLInputElement).value =
@@ -67,5 +67,5 @@ document.querySelector("form")!.onsubmit = (event) => {
     const [section, name] = elem.getAttribute("data-value")!.split(".");
     (presets as any)[section][name] = (elem as HTMLInputElement).value;
   }
-  chrome.storage.sync.set(presets);
+  browser.storage.sync.set(presets);
 };

@@ -1,11 +1,26 @@
-/node_modules
-/web-ext-artifacts
-/dist
-*.js
-*.css
-*.css.map
-*.tar.gz
-*.zip
+# Logs
+logs
+*.log
+npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-!webpack/webpack.config.js
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.output
+stats.html
+stats-*.json
+.wxt
+web-ext.config.ts
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

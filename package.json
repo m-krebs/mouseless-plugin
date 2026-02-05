@@ -2,21 +2,26 @@
   "name": "mouseless-plugin",
   "version": "0.0.1",
   "description": "For a mouseless future, but on chrome",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "webpack --config webpack/webpack.config.js",
-    "packn": "npm run build && 7z.exe a -tzip mouseless.zip dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare"
   },
-  "keywords": ["chrome", "extension", "mouseless"],
+  "keywords": [
+    "chrome",
+    "extension",
+    "mouseless"
+  ],
   "author": "m-krebs",
   "license": "ISC",
   "devDependencies": {
-    "@types/chrome": "^0.0.242",
-    "copy-webpack-plugin": "^11.0.0",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.1.6",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^5.9.3",
+    "wxt": "^0.20.13"
   }
 }
