@@ -2,24 +2,21 @@
   "name": "mouseless-plugin",
   "version": "1.0.0",
   "description": "For a mouseless future, but on chrome",
-  "type": "module",
-  "scripts": {
-    "dev": "wxt",
-    "dev:firefox": "wxt -b firefox",
-    "build": "wxt build",
-    "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox",
-    "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
-  },
   "keywords": [
     "chrome",
     "extension",
     "mouseless"
   ],
-  "author": "m-krebs",
   "license": "ISC",
+  "author": "m-krebs",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare"
+  },
   "devDependencies": {
     "typescript": "^5.9.3",
     "wxt": "^0.20.13"
